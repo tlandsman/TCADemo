@@ -46,3 +46,8 @@ struct ArticlesListSystem {
         }
     }
 }
+
+// Default Initializer
+extension ArticlesListSystem.State {
+    static var initial = ArticlesListSystem.State()
+}
