@@ -25,9 +25,7 @@ struct TopStoriesServiceTest {
     
 }
 
-private extension URL {
-    static let any = URL(string: "https://www.any.com")!
-}
+
 
 private extension URLResponse {
     static let any = HTTPURLResponse(url: .any, statusCode: 200, httpVersion: nil, headerFields: nil)!

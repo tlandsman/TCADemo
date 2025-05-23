@@ -63,7 +63,3 @@ struct ArticlesListSystemTest {
 private extension Article {
     static let mock1 = Self(title: "title", byline: "by Jane Doe")
 }
-
-private extension ArticlesListSystem.State {
-    static var initial = ArticlesListSystem.State()
-}
