@@ -5,14 +5,19 @@ struct ArticlesListView: View {
     @Bindable var store: StoreOf<ArticlesListSystem>
     var body: some View {
         NavigationView {
-            ListView(articles: store.articles)
-                .onAppear {
+            Group {
+                if store.isLoading {
+                    ProgressView()
+                } else {
+                    ListView(articles: store.articles)
+                }
+            }
+            .onAppear {
                 store.send(.onAppear)
             }
             .navigationTitle("Top Stories")
         }
     }
-    
 }
 
 private struct ListView: View {
@@ -26,11 +31,8 @@ private struct ListView: View {
 
 
 
-
-
-
 #Preview {
-    let initialState = ArticlesListSystem.State(articles: [.mock1, .mock2])
+    let initialState = ArticlesListSystem.State(articles: [.mock1, .mock2], isLoading:false, errorMessage: nil)
     let store: StoreOf<ArticlesListSystem> = Store(initialState: initialState, reducer: ArticlesListSystem.init)
     ArticlesListView(store: store)
 }
