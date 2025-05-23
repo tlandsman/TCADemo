@@ -24,9 +24,9 @@ struct GenericService<T: Codable> {
         self.client = client
     }
     
-    func performRequest(_ request: URLRequest) async throws -> T {
-        var request = request
-        request.addValue(apiKey, forHTTPHeaderField: "api-key")
+    func performRequest(_ url: URL) async throws -> T {
+        let url = url.appendingQueryParameters(["api-key" : apiKey])
+        let request = URLRequest(url: url)
         
         let (data, _) = try await client.perform(urlRequest: request)
         let decoder = JSONDecoder()

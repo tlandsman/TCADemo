@@ -13,9 +13,7 @@ struct GenericServiceTest {
         _ = try await sut.performRequest(.any)
         
         if let request = clientSpy.request {
-            let headers = request.allHTTPHeaderFields
-            let apiKeyHeader = headers?["api-key"]
-            #expect(apiKeyHeader != nil )
+            #expect(request.url?.absoluteString.contains("api-key") == true)
         } else {
             #expect(Bool(false), "Request was not made")
         }

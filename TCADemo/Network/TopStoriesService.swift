@@ -8,9 +8,7 @@ import Foundation
 
 struct TopStoriesService {
     private let baseURL = URL(string: "https://api.nytimes.com/svc/topstories/v2/home.json")!
-    private var urlRequest: URLRequest {
-        return URLRequest(url: baseURL)
-    }
+
     private let service: GenericService<APIArticlesResponse>
     
     init(client: HTTPClient = URLSession.shared) {
@@ -18,7 +16,7 @@ struct TopStoriesService {
     }
     
     func fetchTopStories() async throws -> [APIArticle] {
-        let response: APIArticlesResponse = try await service.performRequest(urlRequest)
+        let response: APIArticlesResponse = try await service.performRequest(baseURL)
         return response.results
     }
 
